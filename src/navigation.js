@@ -1,4 +1,15 @@
-searchFormBtn.addEventListener('click', () => location.hash = '#search='+ searchFormInput.value);
+let maxPage;
+let page = 1;
+let infiniteScroll;
+
+
+
+searchFormBtn.addEventListener('click', () => {
+    console.log(searchFormInput.value)
+    if(searchFormInput.value){
+        location.hash = '#search='+ searchFormInput.value
+    }
+});
 trendingBtn.addEventListener('click', () => location.hash = '#trends');
 arrowBtn.addEventListener('click', () => {
     // Si el usuario es la primera vez que llega a una página, lo llevamos a la página principal
@@ -10,15 +21,17 @@ arrowBtn.addEventListener('click', () => {
 });
 headerTitle.addEventListener('click', () => location.hash = '#home');
 
+window.addEventListener('DOMContentLoaded', appNavigator, false);
+window.addEventListener('hashchange', appNavigator, false);
+window.addEventListener('scroll', infiniteScroll, false);
 
-
-
-window.addEventListener('DOMContentLoaded', navigator, false);
-window.addEventListener('hashchange', navigator, false);
-
-function navigator(){
+function appNavigator(){
     console.log({location});
 
+    if(infiniteScroll){
+        window.removeEventListener('scroll', infiniteScroll, {passive: false});
+        infiniteScroll = undefined;
+    }
     location.hash.startsWith('#trends')
         ? trendsPage()
         : location.hash.startsWith('#search=')
@@ -32,6 +45,25 @@ function navigator(){
                     //para que cada vez que entre a algún hash, se vea desde el inicio de la página, no desde el fin
                     document.documentElement.scrollTop =0;
                     document.body.scrollTop = 0;
+
+    if(infiniteScroll){
+        window.addEventListener('scroll', infiniteScroll, {passive: false});
+    }
+
+    getPreferredLanguage();
+
+}
+
+if(langSelected){
+    languages.sort((a,b) =>{
+        if(a.name === langSelected){
+            return -1;
+        } else if (b.name === langSelected){
+            return 1;
+        } else{
+            return 0;
+        }
+    })
 }
 
 function homePage(){
@@ -47,14 +79,18 @@ function homePage(){
     searchForm.classList.remove('inactive');
 
     trendingPreviewSection.classList.remove('inactive');
+    likedMoviesSection.classList.remove('inactive');
     categoriesPreviewSection.classList.remove('inactive');
+    selectContainLanguaje.classList.remove('inactive')
+
     genericSection.classList.add('inactive');
     movieDetailSection.classList.add('inactive');
 
     getCategoriesMoviesPreview();
     getTrendingMoviesPreview();
+    getLikedMovies();
+    createLanguages();
 }
-
 function categoriesPage(){
 
     headerSection.classList.remove('header-container--long')
@@ -67,7 +103,10 @@ function categoriesPage(){
     searchForm.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
+    likedMoviesSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
+    selectContainLanguaje.classList.add('inactive')
+
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
 
@@ -85,6 +124,7 @@ function categoriesPage(){
     
     // llamamos la función con el id
     getMoviesByCategory(categoryId);
+    infiniteScroll = getPaginatedMoviesByCategory(categoryId);
 }
 
 function movieDetailPage(){
@@ -99,7 +139,10 @@ function movieDetailPage(){
     searchForm.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
+    likedMoviesSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
+    selectContainLanguaje.classList.add('inactive')
+
     genericSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
 
@@ -117,17 +160,22 @@ function searchPage(){
     arrowBtn.classList.remove('inactive');
     arrowBtn.classList.add('header-arrow-white');
 
-    headerTitle.classList.add('inactive');
+    headerTitle.classList.remove('inactive');
     headerCategoryTitle.classList.add('inactive');
     searchForm.classList.remove('inactive');
 
     trendingPreviewSection.classList.add('inactive');
+    likedMoviesSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
+    selectContainLanguaje.classList.add('inactive')
+
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
     
     let query = location.hash.split('=')[1];
+    
     getMoviesBySearch(decodeURI(query)) 
+    infiniteScroll = getPaginatedMoviesBySearch(decodeURI(query));
 }
 
 function trendsPage(){
@@ -142,7 +190,10 @@ function trendsPage(){
     searchForm.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
+    likedMoviesSection.classList.add('inactive');
     categoriesPreviewSection.classList.add('inactive');
+    selectContainLanguaje.classList.add('inactive')
+
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
     
@@ -150,4 +201,5 @@ function trendsPage(){
 
     getTrendingMovies()
     console.log('TRENDS')
+    infiniteScroll = getPaginatedTrendingMovies;
 }

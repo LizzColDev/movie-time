@@ -11,12 +11,20 @@
 </head>
 <body>
 <header id="header" class="header-container">
-<span class="header-arrow inactive">&lt;</span>
-<h1 class="header-title">MovieTime</h1>
-<h1 class="header-title header-title--categoryView inactive">Acción</h1>
-<form id="searchForm" class="header-searchForm">
-<input type="text" placeholder="Search Movies" />
-<button id="searchBtn">🔍</button>
+    <span class="header-arrow inactive">&lt;</span>
+    <article class="header-title-languajes">
+        <h1 class="header-title">MovieTime</h1>
+
+        <select class="languages-section" name="select">
+            <!-- <option value="value1">Value 1</option>
+            <option value="value2" selected>Value 2</option>
+            <option value="value3">Value 3</option> -->
+        </select>
+    </article>
+    <h1 class="header-title header-title--categoryView inactive">Acción</h1>
+    <form id="searchForm" class="header-searchForm">
+        <input type="text" placeholder="Search Movies" />
+        <button id="searchBtn">🔍</button>
 </form>
 </header>
 <section id="trendingPreview" class="trendingPreview-container">
@@ -25,47 +33,83 @@
 <button class="trendingPreview-btn">Ver más</button>
 </div>
 <article class="trendingPreview-movieList">
-
-    <!-- <div class="movie-container">
-<img
+    <div class="movie-container movie-container--loading"></div>
+    <div class="movie-container movie-container--loading"></div>
+    <div class="movie-container movie-container--loading"></div>
+    <div class="movie-container movie-container--loading"></div>
+    <div class="movie-container movie-container--loading">
+<!-- <img
         src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
         class="movie-img"
         alt="Nombre de la película"
-        />
-</div> -->
+        /> -->
+</div>
 
 </article>
 </section>
 <section id="categoriesPreview" class="categoriesPreview-container">
     <h2 class="categoriesPreview-title">Categorías</h2>
     <article class="categoriesPreview-list">
-        <!-- <div class="category-container">
-            <h3 id="id28" class="category-title">Romance</h3>
-        </div> -->
+        <div class="category-container category-container--loading"></div>
+        <div class="category-container category-container--loading"></div>
+        <div class="category-container category-container--loading">
+            <!-- <h3 id="id28" class="category-title">Romance</h3> -->
+        </div>
+    </article>
+</section>
+<section id="liked" class="liked-container">
+    <div class="liked-header">
+        <h2 class="liked-title">Películas Favoritas</h2>
+    </div>
+    <article class="liked-movieList">
+        <div class="movie-container">
+            <img
+                src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+                class="movie-img"
+                alt="Nombre de la película"
+                />
+        </div>
+        <div class="movie-container">
+            <img
+                src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+                class="movie-img"
+                alt="Nombre de la película"
+                />
+        </div>
+        <div class="movie-container">
+            <img
+                src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+                class="movie-img"
+                alt="Nombre de la película"
+                />
+        </div>
+        <div class="movie-container">
+            <img
+                src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+                class="movie-img"
+                alt="Nombre de la película"
+                />
+        </div>
+        <div class="movie-container">
+            <img
+                src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+                class="movie-img"
+                alt="Nombre de la película"
+                />
+        </div>
     </article>
 </section>
 <section id="genericList" class="genericList-container inactive">
-<div class="movie-container">
-<img
-        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-        class="movie-img"
-        alt="Nombre de la película"
-      />
-</div>
-<div class="movie-container">
-<img
-        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-        class="movie-img"
-        alt="Nombre de la película"
-      />
-</div>
-<div class="movie-container">
-<img
-        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-        class="movie-img"
-        alt="Nombre de la película"
-      />
-</div>
+    <div class="movie-container genericList-container--loading"></div>
+    <div class="movie-container genericList-container--loading"></div>
+    <div class="movie-container genericList-container--loading"></div>
+    <div class="movie-container genericList-container--loading">
+        <!-- <img
+            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+            class="movie-img"
+            alt="Nombre de la película"
+            /> -->
+    </div>
 </section>
 <section id="movieDetail" class="movieDetail-container inactive">
     <h1 class="movieDetail-title">Deadpool</h1>
@@ -74,33 +118,26 @@
     Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.
     </p>
     <article class="categories-list">
-        <div class="category-container">
-            <h3 id="id28" class="category-title">Romance</h3>
+        <div class="category-container category-container--loading"></div>
+        <div class="category-container category-container--loading"></div>
+        <div class="category-container category-container--loading"></div>
+
+        <div class="category-container category-container--loading">
+            <!-- <h3 id="id28" class="category-title">Romance</h3> -->
         </div>
     </article>
     <article class="relatedMovies-container">
         <h2 class="relatedMovies-title">Películas similares</h2>
         <div class="relatedMovies-scrollContainer">
-            <div class="movie-container">
-                <img
+            <div class="movie-container movie-container--loading"></div>
+            <div class="movie-container movie-container--loading"></div>
+            <div class="movie-container movie-container--loading">
+                
+                <!-- <img
                     src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
                     class="movie-img"
                     alt="Nombre de la película"
-                    />
-            </div>
-            <div class="movie-container">
-                <img
-                    src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-                    class="movie-img"
-                    alt="Nombre de la película"
-                    />
-            </div>
-            <div class="movie-container">
-                <img
-                    src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-                    class="movie-img"
-                    alt="Nombre de la película"
-                    />
+                    /> -->
             </div>
         </div>
     </article>
@@ -124,6 +161,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./src/secrets.js"></script>
 <script src="./src/nodes.js"></script>
+<script src="./src/languages.js"></script>
 <script src="./src/main.js"></script>
 <script src="./src/navigation.js"></script>
 </body>
