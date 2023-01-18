@@ -3,7 +3,6 @@ let page = 1;
 let infiniteScroll;
 
 
-
 searchFormBtn.addEventListener('click', () => {
     console.log(searchFormInput.value)
     if(searchFormInput.value){
@@ -69,6 +68,7 @@ if(langSelected){
 function homePage(){
     console.log('Home!!')
     
+
     headerSection.classList.remove('header-container--long')
     headerSection.style.background = '';
     arrowBtn.classList.add('inactive');

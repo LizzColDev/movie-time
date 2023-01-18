@@ -3,17 +3,20 @@
 //crear la configuración por defecto que trabajaremos con AXIOS, no solo se pueden agregar header sino también query parameters
 let lang = localStorage.getItem('language') || navigator.language ;
 let langSelected = localStorage.getItem('languageSelected') || 'Español'
+let API_KEY;
 
+console.log(API_KEY)
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers:{
         'Content-Type': 'aplication/json; charset=utf-8'
     },
     params: {
-        'api_key': API_KEY,
+        'api_key': getApiKey(),
         'language': lang,
     }
 });
+
 
 // FUNCIONES PARA LOCALSTORAGE, GRABAR PELÍCULAS FAVORITOS
 function likedMoviesList(){
@@ -44,6 +47,11 @@ function likeMovie(movie){
 
 // función nodes // utils
 
+function getApiKey(){
+    if(!API_KEY){
+        return API_KEY = prompt('Digite su API_KEY:')
+    }
+}
 let observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { 
         if(entry.isIntersecting){
