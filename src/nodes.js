@@ -7,7 +7,6 @@ const movieDetailSection = document.querySelector('#movieDetail');
 const footer = document.querySelector('footer')
 const likedMoviesSection = document.querySelector('#liked');
 
-
 // Lists & Containers
 const searchForm = document.querySelector('#searchForm');
 const trendingMoviesPreviewList = document.querySelector('.trendingPreview-movieList');
@@ -16,8 +15,6 @@ const movieDetailCategoriesList = document.querySelector('#movieDetail .categori
 const relatedMoviesContainer = document.querySelector('.relatedMovies-scrollContainer');
 const likedMoviesContainer = document.querySelector('.liked-movieList');
 const selectContainLanguaje = document.querySelector('.languages-section');
-
-
 
 // Elements
 const headerTitle = document.querySelector('.header-title');

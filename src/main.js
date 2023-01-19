@@ -1,11 +1,10 @@
 // Data
-// const urlLang = 'https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>&language=de'
-//crear la configuración por defecto que trabajaremos con AXIOS, no solo se pueden agregar header sino también query parameters
+
 let lang = localStorage.getItem('language') || navigator.language ;
 let langSelected = localStorage.getItem('languageSelected') || 'Español'
 let API_KEY;
 
-console.log(API_KEY)
+// createLanguageSections()
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers:{
@@ -16,7 +15,6 @@ const api = axios.create({
         'language': lang,
     }
 });
-
 
 // localStorage
 function likedMoviesList(){
@@ -76,18 +74,16 @@ function createMovies(
         const movieContainer =document.createElement('div')
         movieContainer.classList.add('movie-container');
 
-
-
         const movieImg = document.createElement('img')
         movieImg.classList.add('movie-img')
         movieImg.setAttribute('alt', movie.title);
-        // evento para verificar errores en las imágenes
+        // Event to check for errors in images
         movieImg.setAttribute(
-            // si tiene como parámetro el observer, le agregamos atributo data-img, si no, directamente al src
+            // If it has the observer parameter, we add the data-img attribute, if not, directly to the src
             lazyLoad ? 'data-img' : 'src', 
             'https://image.tmdb.org/t/p/w300'+ movie.poster_path,
             );
-            // evento de click para acceder a los detalles de la película
+            // click event to access the details of the movie
             movieImg.addEventListener('click', () => location.hash = '#movie=' + movie.id);
             movieImg.addEventListener('error', ()=>{
                 movieImg.setAttribute('src', 'https://img.icons8.com/arcade/512/popcorn.png')
@@ -101,14 +97,13 @@ function createMovies(
                 movieContainer.style.alignItems = 'center'
             });
 
-            // botón like
+            // like button
             const movieBtn = document.createElement('button');
             movieBtn.classList.add('movie-btn');
             likedMoviesList()[movie.id] && movieBtn.classList.add('movie-btn--liked');
             movieBtn.addEventListener('click', () =>{
                 movieBtn.classList.toggle('movie-btn--liked');
 
-                // función que agrega las películas a la sección de favoritas
                 likeMovie(movie);
             } );
 
@@ -282,11 +277,9 @@ async function getTrendingMovies(){
     const {data} = await api('trending/movie/day')
     const movies = data.results;
     
-    // obtenemos la cantidad máxima de páginas, para en paginación parar al llegar al máximo
+    // We get the maximum number of pages, to stop pagination when reaching the maximum
     maxPage = data.total_pages
-    console.log(maxPage)
 
-    // llamamos el nodo para crear los elementos
     createMovies(
         movies, 
         genericSection, 
@@ -312,7 +305,6 @@ async function getPaginatedTrendingMovies(){
                 page,
             },
         })
-        console.log(data)
         const movies = data.results;
         createMovies(
             movies, 
@@ -361,7 +353,7 @@ async function getRelatedMoviesId(id){
 
 function getLikedMovies(){
     const likedMovies = likedMoviesList()
-    // convertimos los valores del objeto en array
+    // We convert the object's values into an array
     const moviesArray = Object.values(likedMovies)
     createMovies(moviesArray, likedMoviesContainer, {lazyLoad: true, cleanPage: true})
 }

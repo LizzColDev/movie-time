@@ -4,14 +4,13 @@ let infiniteScroll;
 
 
 searchFormBtn.addEventListener('click', () => {
-    console.log(searchFormInput.value)
     if(searchFormInput.value){
         location.hash = '#search='+ searchFormInput.value
     }
 });
 trendingBtn.addEventListener('click', () => location.hash = '#trends');
 arrowBtn.addEventListener('click', () => {
-    // Si el usuario es la primera vez que llega a una página, lo llevamos a la página principal
+    // If the user is visiting a page for the first time, we redirect them to the homepage.
     if (window.history.length <= 2) {
     location.hash = '#home';
     } else {
@@ -25,7 +24,6 @@ window.addEventListener('hashchange', appNavigator, false);
 window.addEventListener('scroll', infiniteScroll, false);
 
 function appNavigator(){
-    console.log({location});
 
     if(infiniteScroll){
         window.removeEventListener('scroll', infiniteScroll, {passive: false});
@@ -41,7 +39,6 @@ function appNavigator(){
                     ? categoriesPage()
                     : homePage();
 
-                    //para que cada vez que entre a algún hash, se vea desde el inicio de la página, no desde el fin
                     document.documentElement.scrollTop =0;
                     document.body.scrollTop = 0;
 
@@ -66,9 +63,7 @@ if(langSelected){
 }
 
 function homePage(){
-    console.log('Home!!')
     
-
     headerSection.classList.remove('header-container--long')
     headerSection.style.background = '';
     arrowBtn.classList.add('inactive');
@@ -85,6 +80,8 @@ function homePage(){
 
     genericSection.classList.add('inactive');
     movieDetailSection.classList.add('inactive');
+
+    footer.classList.remove('inactive')
 
     getCategoriesMoviesPreview();
     getTrendingMoviesPreview();
@@ -110,19 +107,16 @@ function categoriesPage(){
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
 
-    //para obtener el id
-    // separamos el location.hash("#category=28-Action")
+    //to get the id - Separating the location.hash("#category=28-Action")
     const [, categoryData] = location.hash.split("=")
-    console.log(categoryData) // 28-Action
     
-    // ahora separamos el categoryData, en el id y el nombre de la categoría
+    // now we split the categoryData, into the id and the name of the category
 
     const [categoryId, categoryName] = categoryData.split('-')
     
-    // le asignamos el nombre de la categoría al nodo que lo requiere
+    // We assign the category name to the node that requires it.
     headerCategoryTitle.innerText = decodeURI(categoryName)
     
-    // llamamos la función con el id
     getMoviesByCategory(categoryId);
     infiniteScroll = getPaginatedMoviesByCategory(categoryId);
 }
@@ -200,6 +194,5 @@ function trendsPage(){
     headerCategoryTitle.innerText = 'Tendencias'
 
     getTrendingMovies()
-    console.log('TRENDS')
     infiniteScroll = getPaginatedTrendingMovies;
 }
