@@ -18,7 +18,7 @@ const api = axios.create({
 });
 
 
-// FUNCIONES PARA LOCALSTORAGE, GRABAR PELÍCULAS FAVORITOS
+// localStorage
 function likedMoviesList(){
     const item = JSON.parse(localStorage.getItem('liked_movies'));
     let movies;
@@ -33,7 +33,6 @@ function likedMoviesList(){
 }
 
 function likeMovie(movie){
-    // movie.id
     const likedMovies = likedMoviesList();
     if(likedMovies[movie.id]){
         likedMovies[movie.id] = undefined;
@@ -41,7 +40,6 @@ function likeMovie(movie){
         likedMovies[movie.id] = movie
     }
     localStorage.setItem('liked_movies', JSON.stringify(likedMovies))
-    getTrendingMoviesPreview()
     getLikedMovies()
 }
 
@@ -176,7 +174,6 @@ function getPreferredLanguage() {
     lang = localStorage.getItem('language') || lang;
 }
 
-// función para conseguir el preview de la lista de películas en tendencia
 async function getTrendingMoviesPreview (){
     const {data} = await api('trending/movie/day', {
         params: {
@@ -324,18 +321,6 @@ async function getPaginatedTrendingMovies(){
         );
     }
 }
-
-// async function getLanguages(lang){
-
-//         const {data} = await api('/movie', {
-//             params:{
-//                 'language': lang,
-//             },
-//         })
-//         console.log(data)
-//         const movies = data.results;
-//         console.log(movies)
-// }
 
 async function getMovieById(movie_id){
 
