@@ -11,6 +11,11 @@
 
 ### Description
 
+- You will need an API key from The Movie DB to use the app. You can get one by signing up on their website: https://developers.themoviedb.org/3/getting-started/introduction
+- Once you have the API key, you will be prompted to enter it when the app loads.
+
+![My gif](https://github.com/LizzColDev/curso-api-rest/blob/github-pages/gif/MovieTime.gif)
+
 This is a codebase for a movie application that displays trending movies, movie categories, and allows users to search for movies and view details about them. The application also allows users to mark movies as "favorites" and view a list of their favorite movies. The application is built using HTML, CSS, and JavaScript.
 
 ## Files
