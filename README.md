@@ -2,9 +2,12 @@
 
 **Table of Contents**
 
-[TOCM]
-
-[TOC]
+- [Description](#description)
+- [Files](#files)
+- [How to use](#how-to-use)
+- [Functionality](#functionality)
+- [Limitations](#limitations)
+- [Future improvements](#future-improvements)
 
 ### Description
 
@@ -50,7 +53,7 @@ This is a codebase for a movie application that displays trending movies, movie 
 
 - The application may not have the security features that are needed for the final version.
 
-##Future Improvements
+## Future Improvements
 
 - Add pagination to the search and categories pages.
 - Add a way to view more details about the movie, such as cast and crew.
