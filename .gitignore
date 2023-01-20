@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# secrets.js (API KEY)
-# src/secrets.js
+# Eslint-prettier
+.eslintrc.js
+.prettierrc
