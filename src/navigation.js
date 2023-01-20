@@ -2,7 +2,6 @@ let maxPage;
 let page = 1;
 let infiniteScroll;
 
-
 searchFormBtn.addEventListener('click', () => {
     if(searchFormInput.value){
         location.hash = '#search='+ searchFormInput.value
@@ -18,7 +17,9 @@ arrowBtn.addEventListener('click', () => {
     }
 });
 headerTitle.addEventListener('click', () => location.hash = '#home');
-
+selectContainLanguaje.addEventListener('change', (e)=>{
+    selectedLanguage(e)
+})
 window.addEventListener('DOMContentLoaded', appNavigator, false);
 window.addEventListener('hashchange', appNavigator, false);
 window.addEventListener('scroll', infiniteScroll, false);
@@ -45,21 +46,6 @@ function appNavigator(){
     if(infiniteScroll){
         window.addEventListener('scroll', infiniteScroll, {passive: false});
     }
-
-    getPreferredLanguage();
-
-}
-
-if(langSelected){
-    languages.sort((a,b) =>{
-        if(a.name === langSelected){
-            return -1;
-        } else if (b.name === langSelected){
-            return 1;
-        } else{
-            return 0;
-        }
-    })
 }
 
 function homePage(){
@@ -86,8 +72,12 @@ function homePage(){
     getCategoriesMoviesPreview();
     getTrendingMoviesPreview();
     getLikedMovies();
+    getPreferredLanguage();
     createLanguages();
+    createLanguageSections();
+
 }
+
 function categoriesPage(){
 
     headerSection.classList.remove('header-container--long')
@@ -190,9 +180,9 @@ function trendsPage(){
 
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
-    
-    headerCategoryTitle.innerText = 'Tendencias'
-
     getTrendingMovies()
     infiniteScroll = getPaginatedTrendingMovies;
+    // headerCategoryTitle.innerText = 'Tendencias'
+
+
 }

@@ -39,6 +39,7 @@ function likeMovie(movie){
     }
     localStorage.setItem('liked_movies', JSON.stringify(likedMovies))
     getLikedMovies()
+    getTrendingMoviesPreview()
 }
 
 // función nodes // utils
@@ -103,10 +104,9 @@ function createMovies(
             likedMoviesList()[movie.id] && movieBtn.classList.add('movie-btn--liked');
             movieBtn.addEventListener('click', () =>{
                 movieBtn.classList.toggle('movie-btn--liked');
-
                 likeMovie(movie);
-            } );
 
+            } );
 
             // intersection observer
             if(lazyLoad){
@@ -115,6 +115,10 @@ function createMovies(
             movieContainer.append(movieImg, movieBtn)
             container.appendChild(movieContainer)
     });
+}
+
+function createLikedBtn(movie){
+
 }
 
 function createCategories(categories, container){
@@ -146,10 +150,11 @@ function createLanguages(){
         optionLanguage.value = language.iso_639_1;
 
         selectContainLanguaje.appendChild(optionLanguage)
+        
     })
 }
 
-selectContainLanguaje.addEventListener('change', (e)=>{
+function selectedLanguage (e){
             lang = e.target.value
             localStorage.setItem('language', lang)
 
@@ -158,15 +163,38 @@ selectContainLanguaje.addEventListener('change', (e)=>{
             const optionName = selectedOption.getAttribute('name');
 
             localStorage.setItem('languageSelected', optionName)
-
-            getTrendingMoviesPreview ()
-            getCategoriesMoviesPreview ()
-            getLikedMovies()
-})
+            homePage()
+}
 
 function getPreferredLanguage() {
     langSelected = localStorage.getItem('languageSelected') 
     lang = localStorage.getItem('language') || lang;
+    
+    languages.sort((a,b) =>{
+        if(a.name === langSelected){
+            return -1;
+        } else if (b.name === langSelected){
+            return 1;
+        } else{
+            return 0;
+        }
+    })
+}
+
+function createLanguageSections() {
+        languagesSections.filter(item => {
+
+        if(langSelected === item.language){
+            trendingPreviewTitle.textContent = item.trendingTitle
+            trendingPreviewBtn.textContent = item.trendingSeeMore
+            categoriesPreviewTitle.textContent = item.categories
+            likedTitle.textContent = item.likedTitle
+            relatedMoviesTitle.textContent = item.relatedMovies
+            inputSearch.placeholder = item.inputPlaceholder
+            headerCategoryTitle.textContent = item.trendingTitle
+        }
+
+        })
 }
 
 async function getTrendingMoviesPreview (){
@@ -230,6 +258,7 @@ function getPaginatedMoviesByCategory(id){
         }
     }
 }
+
 async function getMoviesBySearch (query){
     const {data} = await api('search/movie', {
         params: {
@@ -335,6 +364,17 @@ async function getMovieById(movie_id){
     movieDetailTitle.textContent = movie.title;
     movieDetailDescription.textContent = movie.overview;
     movieDetailScore.textContent = movie.vote_average;
+
+    const movieBtn = document.createElement('button');
+    movieBtn.style.right = "30px";
+    movieBtn.classList.add('movie-btn');
+    likedMoviesList()[movie.id] && movieBtn.classList.add('movie-btn--liked');
+    movieBtn.addEventListener('click', () =>{
+        movieBtn.classList.toggle('movie-btn--liked');
+        likeMovie(movie);
+    } );
+
+    movieDetailDescription.appendChild(movieBtn)
 
     createCategories(movie.genres, movieDetailCategoriesList);
     getRelatedMoviesId(movie_id)

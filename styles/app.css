@@ -284,7 +284,7 @@ button {
 .trendingPreview-btn {
   border-radius: 8px;
   height: 32px;
-  width: 72px;
+  width: 120px;
 }
 
 .trendingPreview-movieList, .liked-movieList {
@@ -507,6 +507,7 @@ footer ul {
 }
 
 .movieDetail-container, .header-container--long, .relatedMovies-scrollContainer {
+  width: 100%;
   max-width: 800px;
 }
 
