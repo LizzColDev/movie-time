@@ -1,0 +1,8 @@
+version: '3.9'
+services:
+  movie-time:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
