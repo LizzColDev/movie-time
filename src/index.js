@@ -1,3 +1,6 @@
+// import dotenv from 'dotenv';
+// dotenv.config();
+
 // Data
 // const urlLang = 'https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>&language=de'
 //crear la configuración por defecto que trabajaremos con AXIOS, no solo se pueden agregar header sino también query parameters

@@ -8,6 +8,7 @@
 - [Functionality](#functionality)
 - [Limitations](#limitations)
 - [Future improvements](#future-improvements)
+- [Using Docker Compose](#using-docker-compose)
 
 ### Description
 
@@ -20,7 +21,7 @@ This is a codebase for a movie application that displays trending movies, movie 
 - **src/main.js**: Contains the necessary logic for the operation of the application. It is responsible for navigating between the different sections of the page, as well as making calls to The Movie DB API to obtain information about the movies. It also contains the necessary logic for the "Like" functionality and search.
 - **languages.js:** Contains an array of languages supported by the website.
 - **src/lazy.js:** A JavaScript file that uses IntersectionObserver API to handle the lazy loading of images.
-- **node.js: **Contains helper functions for creating and manipulating DOM elements. 
+- **node.js:** Contains helper functions for creating and manipulating DOM elements. 
 
 ## How to use
 
@@ -60,3 +61,14 @@ This is a codebase for a movie application that displays trending movies, movie 
 - Optimize the app for mobile devices.
 - Add a way to filter the search results by different criteria.
 - Add a way to view the users favorite movies offline.
+
+## Using Docker Compose
+
+1. Make sure you have Docker and Docker Compose installed on your system.
+2. Open a terminal and navigate to the directory where your docker-compose.yml file is located.
+3. Run the following command to build and start the containers defined in the docker-compose.yml file:
+    ```yaml
+    docker-compose up -d
+    ```
+    This will create and run the containers in the background.
+4. Once the containers are up and running, open your browser and go to http://localhost:3000 to access the MovieTime application.
