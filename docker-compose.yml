@@ -1,8 +1,22 @@
 version: '3.9'
 services:
-  movie-time:
+  frontend:
     build: 
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:80"
+    container_name: movie-frontend
+    restart: unless-stopped
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - PORT=4000
+    command: npm run dev
