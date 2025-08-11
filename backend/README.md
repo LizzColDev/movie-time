@@ -50,7 +50,7 @@ movie-time/
 2. **Create a `.env` file in `backend/` with your config:**
 
    ```
-   PORT=3001
+   PORT=4000
    ```
 
 3. **Run the backend in development mode:**
@@ -60,7 +60,7 @@ movie-time/
    npm run dev
    ```
 
-   The server will be available at [http://localhost:3001](http://localhost:3001)
+   The server will be available at [http://localhost:4000](http://localhost:4000)
 
 ---
 
@@ -76,16 +76,23 @@ movie-time/
 ## 🐳 Docker Usage
 
 1. Make sure Docker and Docker Compose are installed.
-2. From the root of the project, run:
+2. Copy the example environment file:
+
+```bash
+ cp .env.example .env
+```
+
+3. Open `.env` and set your The Movie DB API key
+4. From the root of the project, run:
 
    ```bash
    docker-compose up -d
    ```
 
-3. Once containers are running, you can access the backend at:
+5. Once containers are running, you can access the backend at:
 
    ```
-   http://localhost:3001
+   http://localhost:4000
    ```
 
 ---
@@ -93,4 +100,3 @@ movie-time/
 ## 📄 License
 
 This project is licensed under the **MIT License**.
-
