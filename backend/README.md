@@ -25,16 +25,21 @@ The backend lives inside a monorepo structure alongside the frontend. All code q
 
 ```
 movie-time/
-├── backend/                  # Backend service
-│   ├── controllers/          # Route handlers
-│   ├── middlewares/          # Express middlewares
-│   ├── routes/               # API route definitions
-│   ├── utils/                # Utility functions (optional)
-│   ├── server.js             # Entry point of the server
-│   └── ...                   # Other backend modules
-├── frontend/                 # Frontend app
-├── package.json              # Root configuration (tools, scripts)
-└── docker-compose.yml        # For containerized development
+├── backend/
+│   ├── config/                 # Application configuration and environment variables
+│   ├── src/
+│   │   ├── controllers/        # Request handlers for API endpoints
+│   │   ├── routes/             # Express route definitions
+│   │   ├── services/           # Business logic and TMDB API integration
+│   │   ├── app.js              # Express application configuration
+│   │   └── index.js            # Application entry point
+│   ├── tests/                  # Unit and integration tests
+│   ├── Dockerfile              # Backend container definition
+│   ├── package.json            # Backend dependencies and scripts
+│   └── README.md               # Backend documentation
+├── frontend/                   # React frontend application
+├── package.json                # Monorepo configuration
+└── docker-compose.yml          # Multi-container development setup
 ```
 
 ---
@@ -47,10 +52,12 @@ movie-time/
    npm install
    ```
 
-2. **Create a `.env` file in `backend/` with your config:**
+2. **Create a `.env` file in `backend/`:**
 
-   ```
+   ```env
    PORT=4000
+   TMDB_ACCESS_TOKEN=your_tmdb_read_access_token
+   TMDB_API_URL=https://api.themoviedb.org/3
    ```
 
 3. **Run the backend in development mode:**
@@ -66,10 +73,29 @@ movie-time/
 
 ## 🔧 Functionality
 
-- Express server with a modular route/controller setup.
-- JSON request handling and basic routing.
-- Placeholder for future database and API integration.
+- Express server with a modular architecture.
+- Environment-based configuration using `dotenv`.
+- TMDB service layer built with Axios.
+- Health check endpoint (`GET /api/health`).
 - Environment variable support.
+- Modular architecture following the Route → Controller → Service pattern.
+
+---
+
+## 🧪 Testing
+
+Run all tests with:
+
+```bash
+npm test
+```
+
+Current test coverage includes:
+
+- Health check endpoint.
+- TMDB service.
+
+> **Note:** The TMDB service test currently performs real requests against the TMDB API using a valid access token. In a future iteration, this test will be replaced with mocked HTTP requests to make the test suite independent of external services.
 
 ---
 
@@ -82,7 +108,7 @@ movie-time/
  cp .env.example .env
 ```
 
-3. Open `.env` and set your The Movie DB API key
+3. Open `.env` and set your TMDB Read Access Token.
 4. From the root of the project, run:
 
    ```bash
