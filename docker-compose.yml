@@ -14,9 +14,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4000:4000"
+    env_file:
+      - ./backend/.env
     volumes:
       - ./backend:/app
       - /app/node_modules
-    environment:
-      - PORT=4000
     command: npm run dev
